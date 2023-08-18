@@ -57,7 +57,7 @@ moodle:
     - MOODLE_SMTP_PROTOCOL=tls
 ```
 
-Una vez que termines de editar presiona la tecla ***esc*** para salir del modo edición y escribe ***:qw*** para guardar los cambios
+Una vez que termines de editar presiona la tecla ***esc*** para salir del modo edición y escribe ***:wq*** para guardar los cambios
 
 Para iniciar los contenedores con el proyecto, escribe el siguiente comando en la terminal: (esto iniciará los contenedores y creará las carpetas "moodle", "moodledata" y "mariadb")
 ```
@@ -68,3 +68,13 @@ Para ver la lista de los contenedores creados escribe lo siguiente:
 ```
 docker ps -a
 ```
+
+
+## Errores comunes
+No hay variables de entorno declaradas en el archivo .yml
+![No hay variables de entorno declaradas en el archivo .yml](https://github.com/JosueVerAlar/lmsCapacitacionDGETI/assets/96144916/d16fe6e2-c89f-469c-aa70-b8b9d8847b7f)
+Este error normalmente se da cuando no se definen los password necesarios para que la base de datos de mariaDB se pueda iniciar correctamente. Se soluciona entrando al siguiente link [mariaDB Bitnami](https://hub.docker.com/r/bitnami/mariadb) y buscando la definición de las variables que se indican en el error, después se agregan al archivo ***docker-compose.yml*** para que se configuren desde él nuevamente y se vuelve a usar el siguiente comando para actualizar:
+```
+docker compose up -d
+```
+
