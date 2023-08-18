@@ -71,10 +71,13 @@ docker ps -a
 
 
 ## Errores comunes
-No hay variables de entorno declaradas en el archivo .yml
+### No hay variables de entorno declaradas en el archivo .yml
 ![No hay variables de entorno declaradas en el archivo .yml](https://github.com/JosueVerAlar/lmsCapacitacionDGETI/assets/96144916/d16fe6e2-c89f-469c-aa70-b8b9d8847b7f)
 Este error normalmente se da cuando no se definen los password necesarios para que la base de datos de mariaDB se pueda iniciar correctamente. Se soluciona entrando al siguiente link [mariaDB Bitnami](https://hub.docker.com/r/bitnami/mariadb) y buscando la definición de las variables que se indican en el error, después se agregan al archivo ***docker-compose.yml*** para que se configuren desde él nuevamente y se vuelve a usar el siguiente comando para actualizar:
 ```
 docker compose up -d
 ```
+
+### Error al conectar moodle con la base de datos 
+![error al conectar moodle a base de datos](https://github.com/JosueVerAlar/lmsCapacitacionDGETI/assets/96144916/ffd67415-fb57-4802-a1f7-273754909a56)
 
