@@ -33,10 +33,11 @@ Para entrar a editar el archivo usa el siguiente comando:
 vi docker-compose.yml
 ```
 
-y para comenzar a editar presiona la tecla ***"insert".***
+y para comenzar a editar presiona la tecla ***"insert".*** (modo de edición)
 
-Para borrar oprime la tecla ***d***
+Para borrar oprime la tecla ***d*** (mientras no estés en modo de edición)
 Para pegar oprime ***ctrl*** + ***shift*** + ***v***
+Para copiar oprime ***ctrl*** + ***shift*** + ***c***
 
 Debido a que moodle requiere algunas configuraciones iniciales para iniciar correctamente, es importante revisar el siguiente link [moodle Bitnami](https://hub.docker.com/r/bitnami/moodle), ya que ahí se detallan elementos necesarios de accesos y otras configuraciones. En particular, se requiere agregar los siguientes campos al archivo "docker-compose.yml":
 ```
@@ -69,6 +70,44 @@ Para ver la lista de los contenedores creados escribe lo siguiente:
 docker ps -a
 ```
 
+Para buscar un comando anteriormente ejecutado escribe ***ctrl*** + ***r***, se activará la casilla de busqueda, teclea la palabra que deseas buscar. Si no aparece en el resultado, vuelve a teclear ***ctrl*** + ***r*** para cambiar de opcion.
+
+## Configuración final
+***(Recuerda ya tener preparados los archivos .yml y .env para facilitar el despliegue)***
+El orden de los comandos ya con el archivo ***.yml*** y el archivo ***.env*** es el siguiente:
+```
+docker compose up -d
+```
+ahora verifica el funcionamiento de la base de datos
+```
+docker logs mariadb_data/ -f 
+```
+
+### Deberá aparecer el siguiente error (Error de acceso por permisos)
+![Error de acceso por permisos](https://github.com/JosueVerAlar/lmsCapacitacionDGETI/assets/96144916/1043fddc-f996-4117-ad3f-38888b9561ec)
+
+Ejecutar el siguiente comando
+
+```
+sudo chown -R 1001:1001 mariadb_data/
+```
+
+verifica que se hayan cambiado los permisos con el siguiente comando
+```
+ll
+```
+
+reinicia los contenedores nuevamente
+```
+docker compose up -d
+```
+
+verifica el funcionamiento de la base de datos (ya debería de tener acceso sin problema)
+```
+docker logs <nombre-del-contenedor>
+```
+
+***ya debería estar funcionando correctamente***
 
 ## Errores comunes
 ### No hay variables de entorno declaradas en el archivo .yml
